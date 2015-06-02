@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/dmytroyarmak/dysysolver-webapp",
   "devDependencies": {
+    "bower": "^1.4.1",
     "browser-sync": "^2.7.6",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.5.2"
   }
 }
