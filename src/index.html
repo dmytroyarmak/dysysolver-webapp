@@ -9,74 +9,71 @@
 <body ng-controller="DssController as vm" layout="column">
   <md-toolbar>
     <div class="md-toolbar-tools">
-      <h1>Моделювання динаміки просторово-часового процеса</h1>
+      <h1>Моделювання динаміки просторово-часового процесу</h1>
     </div>
   </md-toolbar>
 
-  <md-content class="md-padding">
-    <form name="problemForm" ng-submit="vm.submitProblem()">
-      <section>
-        <md-subheader class="md-primary md-no-sticky">Розмірність задачі:</md-subheader>
+  <md-content>
+    <md-tabs md-dynamic-height="true" md-selected="vm.selectedStepIndex">
+      <md-tab label="Модель">
+        <md-content class="md-padding">
+          <form name="vm.modelStepForm" ng-submit="vm.submitModelStepForm()">
+            <md-input-container>
+              <label>Функція Гріна G</label>
+              <input type="text" name="g" ng-model="vm.problem.model.g" required>
+            </md-input-container>
 
-        <md-radio-group ng-model="vm.problem.dimension">
-          <md-radio-button ng-value="0">(t)</md-radio-button>
-          <md-radio-button ng-value="1">(x<sub>1</sub>, t)</md-radio-button>
-          <md-radio-button ng-value="2">(x<sub>1</sub>, x<sub>2</sub>, t)</md-radio-button>
-        </md-radio-group>
-      </section>
+            <md-input-container>
+              <label>Розподілене зовнішньодинамічне збурення u(s)</label>
+              <input type="text" name="u" ng-model="vm.problem.model.u" required>
+            </md-input-container>
 
-      <section>
-        <md-subheader class="md-primary md-no-sticky">Досліджуваний процес</md-subheader>
+            <md-input-container>
+              <label>Функція стану процесу y(s)</label>
+              <input type="text" name="y" ng-model="vm.problem.model.y" required>
+            </md-input-container>
 
-        <md-radio-group ng-model="vm.problem.process">
-          <md-radio-button ng-value="vm.processes[0]">G()= ... , u(s)= ..., y(s)= ...</md-radio-button>
-          <md-radio-button ng-value="vm.processes[1]">G()= ... , u(s)= ..., y(s)= ...</md-radio-button>
-        </md-radio-group>
-      </section>
+            <md-button class="md-raised" type="button" ng-click="vm.selectStoredModel()">Вибрати збережену модель</md-button>
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="vm.modelStepForm.$invalid">Далі</md-button>
+          </form>
+        </md-content>
+      </md-tab>
 
-      <section>
-        <md-subheader class="md-primary md-no-sticky">Досліджувана область</md-subheader>
+      <md-tab label="Область" ng-disabled="vm.isAreaStepDisabled()">
+        <md-content class="md-padding">
+          <md-input-container>
+            <label>Час закінчення процеса T</label>
+            <input type="number" ng-model="vm.problem.area.t">
+          </md-input-container>
 
-        <md-input-container>
-          <label>Максимальне значення часу</label>
-          <input type="number" ng-model="vm.problem.tMax">
-        </md-input-container>
+          <md-input-container>
+            <label>Значення початкової точки x<sub>1</sub></label>
+            <input type="number" ng-model="vm.problem.area.x1">
+          </md-input-container>
 
-        <md-input-container>
-          <label>Мінімальне значення x</label>
-          <input type="number" ng-model="vm.problem.xMin">
-        </md-input-container>
+          <md-input-container>
+            <label>Значення кінцевої точки x<sub>2</sub></label>
+            <input type="number" ng-model="vm.problem.area.x2">
+          </md-input-container>
+        </md-content>
+      </md-tab>
 
-        <md-input-container>
-          <label>Максимальне значення x</label>
-          <input type="number" ng-model="vm.problem.xMax">
-        </md-input-container>
-      </section>
-
-      <section>
-        <md-subheader class="md-primary md-no-sticky">Початкові спостереження</md-subheader>
-
-        <md-list>
-          <md-list-item>t=<input type="number">, x=<input type="number"></md-list-item>
-          <md-list-item>t=<input type="number">, x=<input type="number"></md-list-item>
-        </md-list>
-      </section>
+      <md-tab label="Крайові умови" ng-disabled="vm.isBoundaryConditionsStepDisabled()">
+        <md-content class="md-padding">
+        </md-content>
+      </md-tab>
 
 
-      <section>
-        <md-subheader class="md-primary md-no-sticky">Крайові спостереження</md-subheader>
+      <md-tab label="M-змінні" ng-disabled="vm.isMVariablesStepDisabled()">
+        <md-content class="md-padding">
+        </md-content>
+      </md-tab>
 
-        <md-list>
-          <md-list-item>t=<input type="number">, x=<input type="number"></md-list-item>
-          <md-list-item>t=<input type="number">, x=<input type="number"></md-list-item>
-        </md-list>
-      </section>
-
-      <p>
-        <button type="submit">Пошук рішення</button>
-      </p>
-    </form>
-  </md-content>
+      <md-tab label="Розв'язок" ng-disabled="vm.isSolutionStepDisabled()">
+        <md-content class="md-padding">
+        </md-content>
+      </md-tab>
+    </md-tabs>
 
   <script src="./dss.vendor.js"></script>
   <script src="./dss.js"></script>
