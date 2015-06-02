@@ -4,7 +4,10 @@ var browserSync = require('browser-sync').create();
 
 var paths = {
   index: './src/index.html',
-  js: './src/app/**/*.js',
+  js: [
+    './src/app/dss.js',
+    './src/app/dss.controller.js',
+  ],
   vendorJs: [
     'bower_components/angular/angular.js'
   ],
@@ -28,7 +31,7 @@ gulp.task('vendor-js', function() {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('build', ['index', 'js']);
+gulp.task('build', ['index', 'vendor-js', 'js']);
 
 gulp.task('index-watch', ['index'], browserSync.reload);
 gulp.task('js-watch', ['js'], browserSync.reload);

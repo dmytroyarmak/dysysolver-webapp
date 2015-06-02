@@ -6,6 +6,102 @@
 </head>
 <body>
   <h1>Dynamic System Solver</h1>
+
+  <div ng-app="dss">
+    <div ng-controller="DssController as vm">
+      <form name="problemForm" ng-submit="vm.submitProblem()">
+        <ol>
+          <li>
+            <strong>Розмірність задачі:</strong>
+
+            <p>
+              <label>
+                <input type="radio" ng-model="vm.problem.dimension" ng-value="0" name="dimension" disabled>
+                (t)
+              </label>
+            </p>
+
+            <p>
+              <label>
+                <input type="radio" ng-model="vm.problem.dimension" ng-value="1" name="dimension">
+                (x<sub>1</sub>, t)
+              </label>
+            </p>
+
+            <p>
+              <label>
+                <input type="radio" ng-model="vm.problem.dimension" ng-value="2" name="dimension" disabled>
+                (x<sub>1</sub>, x<sub>2</sub>, t)
+              </label>
+            </p>
+          </li>
+
+          <li>
+            <strong>Досліджуваний процес</strong>
+
+            <p>
+              <label>
+                <input type="radio" ng-model="vm.problem.process" ng-value="vm.processes[0]" name="process">
+                G()= ...
+                u(s)= ...
+                y(s)= ...
+              </label>
+            </p>
+
+
+            <p>
+              <label>
+                <input type="radio" ng-model="vm.problem.process" ng-value="vm.processes[1]" name="process">
+                G()= ...
+                u(s)= ...
+                y(s)= ...
+              </label>
+            </p>
+          </li>
+
+          <li>
+            <strong>Досліджувана область</strong>
+
+            <p>
+              T from 0 to <input type="number" ng-model="vm.problem.tMax">
+            </p>
+
+            <p>
+              x<sub>1</sub>=<input type="number" ng-model="vm.problem.x1">
+            </p>
+
+            <p>
+              x<sub>2</sub>=<input type="number" ng-model="vm.problem.x2">
+            </p>
+          </li>
+
+          <li>
+            <strong>Початкові спостереження</strong>
+
+            <ul>
+              <li>t=<input type="number">, x=<input type="number"></li>
+              <li>t=<input type="number">, x=<input type="number"></li>
+            </ul>
+          </li>
+
+
+          <li>
+            <strong>Крайові спостереження</strong>
+
+            <ul>
+              <li>t=<input type="number">, x=<input type="number"></li>
+              <li>t=<input type="number">, x=<input type="number"></li>
+            </ul>
+          </li>
+        </ol>
+
+        <p>
+          <button type="submit">Пошук рішення</button>
+        </p>
+      </form>
+    </div>
+  </div>
+
   <script src="./dss.vendor.js"></script>
   <script src="./dss.js"></script>
 </body>
