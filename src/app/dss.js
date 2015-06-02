@@ -2,5 +2,7 @@
   'use strict';
 
   angular
-    .module('dss', []);
+    .module('dss', [
+      'ngMaterial'
+    ]);
 })();

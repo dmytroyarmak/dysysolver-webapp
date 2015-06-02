@@ -9,7 +9,13 @@ var paths = {
     './src/app/dss.controller.js',
   ],
   vendorJs: [
-    'bower_components/angular/angular.js'
+    'bower_components/angular/angular.js',
+    'bower_components/angular-aria/angular-aria.js',
+    'bower_components/angular-animate/angular-animate.js',
+    'bower_components/angular-material/angular-material.js'
+  ],
+  vendorCss: [
+    'bower_components/angular-material/angular-material.css',
   ],
   dist: './dist'
 };
@@ -31,7 +37,13 @@ gulp.task('vendor-js', function() {
     .pipe(gulp.dest(paths.dist));
 });
 
-gulp.task('build', ['index', 'vendor-js', 'js']);
+gulp.task('vendor-css', function() {
+  return gulp.src(paths.vendorCss)
+    .pipe(concat('dss.vendor.css'))
+    .pipe(gulp.dest(paths.dist));
+});
+
+gulp.task('build', ['index', 'vendor-js', 'js', 'vendor-css']);
 
 gulp.task('index-watch', ['index'], browserSync.reload);
 gulp.task('js-watch', ['js'], browserSync.reload);
