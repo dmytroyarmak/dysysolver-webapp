@@ -1,0 +1,23 @@
+{
+  "name": "dysysolver-webapp",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dmytroyarmak/dysysolver-webapp.git"
+  },
+  "author": "Dmytro Yarmak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dmytroyarmak/dysysolver-webapp/issues"
+  },
+  "homepage": "https://github.com/dmytroyarmak/dysysolver-webapp",
+  "devDependencies": {
+    "browser-sync": "^2.7.6",
+    "gulp": "^3.9.0"
+  }
+}
