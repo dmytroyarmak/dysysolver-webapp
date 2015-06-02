@@ -41,20 +41,24 @@
 
       <md-tab label="Область" ng-disabled="vm.isAreaStepDisabled()">
         <md-content class="md-padding">
-          <md-input-container>
-            <label>Час закінчення процеса T</label>
-            <input type="number" ng-model="vm.problem.area.t">
-          </md-input-container>
+          <form name="vm.areaStepForm" ng-submit="vm.submitAreaStepForm()">
+            <md-input-container>
+              <label>Час закінчення процеса T</label>
+              <input type="number" name="t" ng-model="vm.problem.area.t" required ng-min="0">
+            </md-input-container>
 
-          <md-input-container>
-            <label>Значення початкової точки x<sub>1</sub></label>
-            <input type="number" ng-model="vm.problem.area.x1">
-          </md-input-container>
+            <md-input-container>
+              <label>Значення початкової точки x<sub>1</sub></label>
+              <input type="number" name="x1" ng-model="vm.problem.area.x1" required ng-max="vm.problem.area.x2">
+            </md-input-container>
 
-          <md-input-container>
-            <label>Значення кінцевої точки x<sub>2</sub></label>
-            <input type="number" ng-model="vm.problem.area.x2">
-          </md-input-container>
+            <md-input-container>
+              <label>Значення кінцевої точки x<sub>2</sub></label>
+              <input type="number" name="x2" ng-model="vm.problem.area.x2" required ng-min="vm.problem.area.x1">
+            </md-input-container>
+
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="vm.areaStepForm.$invalid">Далі</md-button>
+          </form>
         </md-content>
       </md-tab>
 

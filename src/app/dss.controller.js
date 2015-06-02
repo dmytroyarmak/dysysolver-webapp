@@ -30,6 +30,7 @@
 
     vm.selectStoredModel = selectStoredModel;
     vm.submitModelStepForm = submitModelStepForm;
+    vm.submitAreaStepForm = submitAreaStepForm;
     vm.isAreaStepDisabled = isAreaStepDisabled;
     vm.isBoundaryConditionsStepDisabled = isBoundaryConditionsStepDisabled;
     vm.isMVariablesStepDisabled = isMVariablesStepDisabled;
@@ -44,12 +45,17 @@
     function submitModelStepForm () {
       vm.selectedStepIndex = 1;
     }
+
+    function submitAreaStepForm () {
+      vm.selectedStepIndex = 2;
+    }
+
     function isAreaStepDisabled () {
       return vm.modelStepForm && vm.modelStepForm.$invalid;
     }
 
     function isBoundaryConditionsStepDisabled () {
-      return true;
+      return isAreaStepDisabled() || (vm.areaStepForm && vm.areaStepForm.$invalid);
     }
 
     function isMVariablesStepDisabled () {
