@@ -62,19 +62,117 @@
         </md-content>
       </md-tab>
 
-      <md-tab label="Крайові умови" ng-disabled="vm.isBoundaryConditionsStepDisabled()">
+      <md-tab label="Початково-крайові умови" ng-disabled="vm.isConditionsStepDisabled()">
         <md-content class="md-padding">
+          <form name="vm.conditionsStepForm" ng-submit="vm.submitConditionsStepForm()">
+            <md-subheader class="md-no-sticky">
+              Початкові умови
+              <md-button class="md-fab md-mini" type="button" ng-click="vm.addInitialCondition()">+</md-button>
+            </md-subheader>
+            <md-list>
+              <md-list-item ng-repeat="initialCondition in vm.problem.conditions.initial" layout="row" layout-sm="column">
+                <md-input-container>
+                  <label>Значення x</label>
+                  <input type="number" ng-model="initialCondition.x" required ng-min="vm.problem.area.x1" ng-max="vm.problem.area.x1">
+                </md-input-container>
+
+                <md-input-container>
+                  <label>Значення y</label>
+                  <input type="number" ng-model="initialCondition.y" required>
+                </md-input-container>
+
+                <md-button type="button" ng-click="vm.removeInitialCondition(initialCondition)">Видалити</md-button>
+              </md-list-item>
+            </md-list>
+
+            <md-divider></md-divider>
+
+            <md-subheader class="md-no-sticky">
+              Крайові умови
+              <md-button class="md-fab md-mini" type="button" ng-click="vm.addBoundatyCondition()">+</md-button>
+            </md-subheader>
+            <md-list>
+              <md-list-item ng-repeat="boundaryCondition in vm.problem.conditions.boundary" layout="row" layout-sm="column">
+                <md-input-container>
+                  <label>Значення x</label>
+                  <input type="number" ng-model="boundaryCondition.x" required>
+                </md-input-container>
+
+                <md-input-container>
+                  <label>Значення t</label>
+                  <input type="number" ng-model="boundaryCondition.t" required ng-min="0" ng-max="vm.problem.area.t">
+                </md-input-container>
+
+                <md-input-container>
+                  <label>Значення y</label>
+                  <input type="number" ng-model="boundaryCondition.y" required>
+                </md-input-container>
+
+                <md-button type="button" ng-click="vm.removeBoundaryCondition(boundaryCondition)">Видалити</md-button>
+              </md-list-item>
+            </md-list>
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="vm.conditionsStepForm.$invalid">Далі</md-button>
+          </form>
         </md-content>
       </md-tab>
 
 
       <md-tab label="M-змінні" ng-disabled="vm.isMVariablesStepDisabled()">
         <md-content class="md-padding">
+          <form name="vm.mVariablesStepForm" ng-submit="vm.submitMVariablesStepForm()">
+            <md-subheader class="md-no-sticky">
+              M<sub>0</sub>
+              <md-button class="md-fab md-mini" type="button" ng-click="vm.addM0Variable()">+</md-button>
+            </md-subheader>
+            <md-list>
+              <md-list-item ng-repeat="mVariable in vm.problem.mVariables.m0" layout="row" layout-sm="column">
+                <md-input-container>
+                  <label>Значення x</label>
+                  <input type="number" ng-model="mVariable.x" required>
+                </md-input-container>
+
+                <md-input-container>
+                  <label>Значення t</label>
+                  <input type="number" ng-model="mVariable.t" required>
+                </md-input-container>
+
+                <md-button type="button" ng-click="vm.removeM0Variable(mVariable)">Видалити</md-button>
+              </md-list-item>
+            </md-list>
+
+            <md-divider></md-divider>
+
+            <md-subheader class="md-no-sticky">
+              M
+              <md-button class="md-fab md-mini" type="button" ng-click="vm.addMVariable()">+</md-button>
+            </md-subheader>
+            <md-list>
+              <md-list-item ng-repeat="mVariable in vm.problem.mVariables.m" layout="row" layout-sm="column">
+                <md-input-container>
+                  <label>Значення x</label>
+                  <input type="number" ng-model="mVariable.x" required>
+                </md-input-container>
+
+                <md-input-container>
+                  <label>Значення t</label>
+                  <input type="number" ng-model="mVariable.t" required>
+                </md-input-container>
+
+                <md-button type="button" ng-click="vm.removeM0Variable(mVariable)">Видалити</md-button>
+              </md-list-item>
+            </md-list>
+
+            <md-button class="md-raised md-primary" type="submit" ng-disabled="vm.mVariablesStepForm.$invalid">Далі</md-button>
+          </form>
         </md-content>
       </md-tab>
 
       <md-tab label="Розв'язок" ng-disabled="vm.isSolutionStepDisabled()">
         <md-content class="md-padding">
+          <md-subheader class="md-no-sticky">Умова в сеарелізованому вигляді</md-subheader>
+          <pre>{{vm.problem | json}}</pre>
+          <md-subheader class="md-no-sticky">Розв'язок</md-subheader>
+          <pre>...</pre>
         </md-content>
       </md-tab>
     </md-tabs>
